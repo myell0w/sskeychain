@@ -43,9 +43,13 @@
         [query setObject:self.label forKey:(__bridge id)kSecAttrLabel];
     }
 #if __IPHONE_4_0 && TARGET_OS_IPHONE
-	CFTypeRef accessibilityType = [SSKeychain accessibilityType];
-    if (accessibilityType) {
-        [query setObject:(__bridge id)accessibilityType forKey:(__bridge id)kSecAttrAccessible];
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
+        [query setObject:(__bridge id)kSecAttrAccessibleAlways forKey:(__bridge id)kSecAttrAccessible];
+    } else {
+        CFTypeRef accessibilityType = [SSKeychain accessibilityType];
+        if (accessibilityType) {
+            [query setObject:(__bridge id)accessibilityType forKey:(__bridge id)kSecAttrAccessible];
+        }
     }
 #endif
     status = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
