@@ -6,7 +6,7 @@
 //  Copyright (c) 2010-2014 Sam Soffes. All rights reserved.
 //
 
-#import "SSKeychainQuery.h"
+#import <SSKeychain/SSKeychainQuery.h>
 
 /**
  Error code specific to SSKeychain that can be returned in NSError objects.
@@ -113,6 +113,7 @@ extern NSString *const kSSKeychainWhereKey;
  accounts. The order of the objects in the array isn't defined.
  */
 + (NSArray *)allAccounts;
++ (NSArray *)allAccounts:(NSError *__autoreleasing *)error;
 
 
 /**
@@ -128,6 +129,7 @@ extern NSString *const kSSKeychainWhereKey;
  doesn't have any accounts for the given `serviceName`. The order of the objects in the array isn't defined.
  */
 + (NSArray *)accountsForService:(NSString *)serviceName;
++ (NSArray *)accountsForService:(NSString *)serviceName error:(NSError *__autoreleasing *)error;
 
 
 #pragma mark - Configuration
